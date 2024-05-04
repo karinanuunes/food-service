@@ -35,6 +35,7 @@ interface ICartContext {
       include: {
         restaurant: {
           select: {
+            id: true;
             deliveryFee: true;
             deliveryTimeMinutes: true;
           };
@@ -137,13 +138,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       include: {
         restaurant: {
           select: {
+            id: true;
             deliveryFee: true;
+            deliveryTimeMinutes: true;
           };
         };
       };
     }>;
     quantity: number;
-    emptyCart?: boolean;
+    emptyCart?: boolean | undefined;
   }) => {
     if (emptyCart) setProducts([]);
     const isProductAlreadyOnCart = products.some(
