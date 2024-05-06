@@ -49,7 +49,6 @@ const ProductDetails = ({
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const { addProductToCart, products } = useContext(CartContext);
-  console.log(products);
   const handleAddToCartClick = () => {
     const hasDifferentRestaurantProduct = products.some(
       (cartProduct) => cartProduct.restaurantId !== product.restaurantId,
@@ -78,6 +77,7 @@ const ProductDetails = ({
               src={product.restaurant.imageUrl}
               alt={product.restaurant.name}
               fill
+              sizes="100%"
               className="rounded-full object-cover"
             />
           </div>
