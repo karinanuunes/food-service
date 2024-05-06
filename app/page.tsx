@@ -11,19 +11,15 @@ import Link from "next/link";
 
 const Home = async () => {
   const products = await db.product.findMany({
-    where: {
-      discountPercentage: {
-        gt: 0,
-      },
-    },
+    where: { discountPercentage: { gt: 0 } },
     take: 10,
-    include: {
-      restaurant: {
-        select: {
-          name: true,
-        },
-      },
-    },
+    include: { restaurant: { select: { name: true } } },
+  });
+  const burguersCategory = await db.category.findFirst({
+    where: { name: "Hambúrgueres" },
+  });
+  const pizzasCategory = await db.category.findFirst({
+    where: { name: "Pizzas" },
   });
 
   return (
@@ -36,10 +32,12 @@ const Home = async () => {
         <CategoryList />
       </div>
       <div className="px-5 pt-6">
-        <PromoBanner
-          src="/promo-banner-01.png"
-          alt="Até 30% de desconto em pizzas"
-        />
+        <Link href={`/categories/${pizzasCategory?.id}/products`}>
+          <PromoBanner
+            src="/promo-banner-01.png"
+            alt="Até 30% de desconto em pizzas"
+          />
+        </Link>
       </div>
       <div className="space-y-4 pt-6">
         <div className="flex items-center justify-between px-5">
@@ -58,10 +56,12 @@ const Home = async () => {
         <ProductList products={products} />
       </div>
       <div className="px-5 pt-6">
-        <PromoBanner
-          src="/promo-banner-02.png"
-          alt="A partir de R$17,90 em lanches"
-        />
+        <Link href={`/categories/${burguersCategory?.id}/products`}>
+          <PromoBanner
+            src="/promo-banner-02.png"
+            alt="A partir de R$17,90 em lanches"
+          />
+        </Link>
       </div>
       <div className="space-y-4 py-6">
         <div className="flex items-center justify-between px-5">
