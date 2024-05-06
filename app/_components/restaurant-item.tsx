@@ -50,6 +50,7 @@ const RestaurantItem = ({
               alt={restaurant.name}
               className="rounded-lg object-cover"
               fill
+              sizes="100%"
             />
           </Link>
           <div className="absolute left-2 top-2 flex items-center gap-[2px] rounded-full bg-white px-2 py-[2px]">
