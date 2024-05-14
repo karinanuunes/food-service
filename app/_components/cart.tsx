@@ -6,7 +6,7 @@ import { formatCurrency } from "../_helpers/price";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { createOrder } from "../_actions/order";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { OrderStatus } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 import {
@@ -134,27 +134,51 @@ const Cart = ({ setIsOpen }: CartProps) => {
         open={isConfirmationDialogOpen}
         onOpenChange={setIsConfirmationDialogOpen}
       >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Deseja finalizar seu pedido?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Ao finalizar seu pedido, você concorda com os termos e condições
-              da nossas plataforma.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleFinishOrderClick}
-              disabled={isSubmitLoading}
-            >
-              {isSubmitLoading && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              Finalizar
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
+        {data?.user ? (
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Deseja finalizar seu pedido?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Ao finalizar seu pedido, você concorda com os termos e condições
+                da nossas plataforma.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancelar</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleFinishOrderClick}
+                disabled={isSubmitLoading}
+              >
+                {isSubmitLoading && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Finalizar
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        ) : (
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Atenção</AlertDialogTitle>
+              <AlertDialogDescription>
+                Para finalizar seu pedido, você precisa estar conectado a sua
+                conta Google em nossa plataforma.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancelar</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => signIn()}
+                disabled={isSubmitLoading}
+              >
+                {isSubmitLoading && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Faça seu login
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        )}
       </AlertDialog>
     </>
   );
