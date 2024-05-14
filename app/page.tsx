@@ -28,7 +28,7 @@ const Home = async () => {
       <div className="px-5 pt-6">
         <Search />
       </div>
-      <div className="px-5 pt-6">
+      <div className="space-y-4 pt-6">
         <CategoryList />
       </div>
       <div className="px-5 pt-6">
