@@ -29,6 +29,7 @@ import {
 import { Prisma } from "@prisma/client";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useContext, useState } from "react";
 
 interface ProductDetailsProps {
@@ -71,20 +72,22 @@ const ProductDetails = ({
   return (
     <>
       <div className="relative z-50 mt-[-1.5rem] rounded-tl-3xl rounded-tr-3xl bg-white py-5">
-        <div className="flex items-center gap-[.375rem] px-5">
-          <div className="relative h-6 w-6">
-            <Image
-              src={product.restaurant.imageUrl}
-              alt={product.restaurant.name}
-              fill
-              sizes="100%"
-              className="rounded-full object-cover"
-            />
+        <Link href={`/restaurants/${product.restaurantId}`}>
+          <div className="flex items-center gap-[.375rem] px-5">
+            <div className="relative h-6 w-6">
+              <Image
+                src={product.restaurant.imageUrl}
+                alt={product.restaurant.name}
+                fill
+                sizes="100%"
+                className="rounded-full object-cover"
+              />
+            </div>
+            <span className="text-xs text-muted-foreground">
+              {product.restaurant.name}
+            </span>
           </div>
-          <span className="text-xs text-muted-foreground">
-            {product.restaurant.name}
-          </span>
-        </div>
+        </Link>
         <h1 className="mb-3 mt-1 px-5 text-xl font-semibold">{product.name}</h1>
         <div className="flex justify-between px-5">
           <div>
