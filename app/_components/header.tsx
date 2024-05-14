@@ -3,12 +3,18 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import {
+  CupSoda,
+  Fish,
   HeartIcon,
   HomeIcon,
+  IceCream,
   LogInIcon,
   LogOutIcon,
   MenuIcon,
+  Pizza,
+  Sandwich,
   ScrollTextIcon,
+  Utensils,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -75,51 +81,103 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-            </>
-          ) : (
-            <>
-              <div className="flex items-center justify-between pt-10">
-                <h2 className="font-semibold">Olá. Faça seu login</h2>
-                <Button size="icon" onClick={hangleSignInClick}>
-                  <LogInIcon />
+              <div className="py-6">
+                <Separator />
+              </div>
+              <div className="space-y-2">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                >
+                  <HomeIcon size={18} />
+                  <span className="block">Início</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  asChild
+                >
+                  <Link href="/my-orders">
+                    <ScrollTextIcon size={18} />
+                    <span className="block">Meus Pedidos</span>
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  asChild
+                >
+                  <Link href="/my-favorite-restaurants">
+                    <HeartIcon size={18} />
+                    <span className="block">Restaurantes Favoritos</span>
+                  </Link>
                 </Button>
               </div>
-            </>
-          )}
-          <div className="py-6">
-            <Separator />
-          </div>
-          <div className="space-y-2">
-            <Button
-              variant="ghost"
-              className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
-            >
-              <HomeIcon size={18} />
-              <span className="block">Início</span>
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
-              asChild
-            >
-              <Link href="/my-orders">
-                <ScrollTextIcon size={18} />
-                <span className="block">Meus Pedidos</span>
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
-              asChild
-            >
-              <Link href="/my-favorite-restaurants">
-                <HeartIcon size={18} />
-                <span className="block">Restaurantes Favoritos</span>
-              </Link>
-            </Button>
-          </div>
-          {data?.user && (
-            <>
+              <div className="py-6">
+                <Separator />
+              </div>
+              <div className="space-y-2">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  asChild
+                >
+                  <Link href="/categories/fa2842fb-3dd8-4a02-b3b5-cf70a2bcda0d/products">
+                    <Utensils size={16} />
+                    <span className="block">Pratos</span>
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  asChild
+                >
+                  <Link href="/categories/6fece720-97d3-4206-ad6c-1c136de82bf0/products">
+                    <Sandwich size={16} />
+                    <span className="block">Lanches</span>
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  asChild
+                >
+                  <Link href="/categories/c1876eb4-941b-4182-8085-1b4831c668c6/products">
+                    <Pizza size={16} />
+                    <span className="block">Pizza</span>
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  asChild
+                >
+                  <Link href="/categories/7a608200-fdc6-4443-adce-d495ab4ae63e/products">
+                    <Fish size={16} />
+                    <span className="block">Japonesa</span>
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  asChild
+                >
+                  <Link href="/categories/46c33e18-0361-48b7-bcf2-6f8e629d293f/products">
+                    <IceCream size={16} />
+                    <span className="block">Sobremesas</span>
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  asChild
+                >
+                  <Link href="/categories/25ba82ce-48c1-43d6-a014-17e7b0ee5c00/products">
+                    <CupSoda size={16} />
+                    <span className="block">Sucos</span>
+                  </Link>
+                </Button>
+              </div>
               <div className="py-6">
                 <Separator />
               </div>
@@ -130,7 +188,16 @@ const Header = () => {
               >
                 <LogOutIcon size={18} />
                 <span className="block">Sair da conta</span>
-              </Button>{" "}
+              </Button>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center justify-between pt-10">
+                <h2 className="font-semibold">Olá. Faça seu login</h2>
+                <Button size="icon" onClick={hangleSignInClick}>
+                  <LogInIcon />
+                </Button>
+              </div>
             </>
           )}
         </SheetContent>
