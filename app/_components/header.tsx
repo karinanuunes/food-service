@@ -27,6 +27,17 @@ import {
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
+import {
+  AlertDialogAction,
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
 
 const Header = () => {
   const { data } = useSession();
@@ -67,6 +78,7 @@ const Header = () => {
                   <Avatar>
                     <AvatarImage
                       src={data?.user?.image as string | undefined}
+                      className="h-10 w-10 rounded-full border-2 border-red-600 object-cover"
                     />
                     <AvatarFallback>
                       {data?.user?.name?.split(" ")[0][0]}
@@ -87,10 +99,13 @@ const Header = () => {
               <div className="space-y-2">
                 <Button
                   variant="ghost"
-                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  className="w-full justify-start space-x-3 rounded-full bg-red-600 text-sm font-normal text-white"
+                  asChild
                 >
-                  <HomeIcon size={18} />
-                  <span className="block">Início</span>
+                  <Link href="/">
+                    <HomeIcon size={18} />
+                    <span className="block">Início</span>
+                  </Link>
                 </Button>
                 <Button
                   variant="ghost"
@@ -181,14 +196,31 @@ const Header = () => {
               <div className="py-6">
                 <Separator />
               </div>
-              <Button
-                variant="ghost"
-                className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
-                onClick={hangleSignOutClick}
-              >
-                <LogOutIcon size={18} />
-                <span className="block">Sair da conta</span>
-              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  >
+                    <LogOutIcon size={18} />
+                    <span className="block">Sair da conta</span>
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Sair da conta</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Deseja mesmo sair da plataforma?
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogAction onClick={hangleSignOutClick}>
+                      Sair
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </>
           ) : (
             <>
