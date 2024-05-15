@@ -18,14 +18,18 @@ const Search = () => {
   };
 
   return (
-    <form className="flex gap-2" onSubmit={handleSearchSubmit}>
+    <form className="flex" onSubmit={handleSearchSubmit}>
       <Input
         placeholder="Buscar restaurantes"
-        className="border-none"
+        className="relative border-none"
         onChange={handleChange}
         value={search}
       />
-      <Button size="icon" type="submit">
+      <Button
+        size="icon"
+        type="submit"
+        className="absolute right-5 w-10 px-[11px]"
+      >
         <SearchIcon size={20} />
       </Button>
     </form>
