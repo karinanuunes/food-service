@@ -8,6 +8,7 @@ import ProductList from "@/app/_components/product-list";
 import CartBanner from "./_components/cart-banner";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/_lib/auth";
+import Link from "next/link";
 
 interface RestaurantPageProps {
   params: { id: string };
@@ -67,13 +68,14 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
       </div>
       <div className="mt-3 flex gap-4 overflow-x-scroll px-5 [&::-webkit-scrollbar]:hidden">
         {restaurant.categories.map((category) => (
-          <div
-            key={category.id}
-            className="min-w-[167px] rounded-lg bg-[#F4F4F4] text-center"
-          >
-            <span className="text-xs text-muted-foreground">
-              {category.name}
-            </span>
+          <div key={category.id}>
+            <Link href={`#${category.name}`}>
+              <div className="min-w-[167px] rounded-lg bg-[#F4F4F4] text-center">
+                <span className="text-xs text-muted-foreground">
+                  {category.name}
+                </span>
+              </div>
+            </Link>
           </div>
         ))}
       </div>
@@ -83,7 +85,9 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
       </div>
       {restaurant.categories.map((category) => (
         <div className="mt-6 space-y-4" key={category.id}>
-          <h2 className="px-5  font-semibold">{category.name}</h2>
+          <h2 className="px-5  font-semibold" id={category.name}>
+            {category.name}
+          </h2>
           <ProductList products={category.products} />
         </div>
       ))}
